@@ -32,6 +32,7 @@
 // USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 // DAMAGE.
 // ----------------------------------------------------------------------
+#define IRQ_BASE 0x80000000
 _init:
 	li x0,0
 	li x1,0
@@ -69,5 +70,10 @@ _init:
 	sw a1, -8(sp)
 	sw a0, -4(sp)
 _end:	 
+	li a0, IRQ_BASE
+	li a1, 1// 0x01
+	sw a1, 0x08(a0) // IER enable
+	sw a1, 0x1c(a0) // MER (ME enable)
+	sw a1, 0x00(a0) // Generate ISR0
 	ebreak
 	// j _end

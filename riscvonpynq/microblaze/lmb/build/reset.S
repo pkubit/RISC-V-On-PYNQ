@@ -3,11 +3,18 @@
 _start:
 	addi    r1, r0, STKPTR
 	nop
+	lwi    r5, r1, -4
+	nop
+	lwi    r6, r1, -8
+	nop
 	brlid   r15, main
+	nop
+	swi r3, r1, -4
 	nop
 	ori r12, r0, 1
 	nop
 	swi r12, r0, iomem
+	nop
 __end:	
 	bri _end
 	nop
